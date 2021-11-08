@@ -1,0 +1,49 @@
+///Color-Bump
+
+// Game constists of a Player bubble and other computer bubbles
+// bubbles can be one of an array of colors [red, orange, blue, green, pink, purple]
+// if the player bubble hits the computer bubble of the same color -> score ++, computer bubble is regenerated
+
+
+// Player bubble 
+// Simple circle of a unitSize 
+// controlled left right up and down to change it's position 
+// Starts with a life of 10
+
+
+// Computer bubbles - array of bubbles starting with two
+// is assigned a random color upon creation 
+// is assigned a random movement direction upon creation
+// is assigned a random location that isnt occupied
+
+
+//Function - after x amount of time, a new bubble is added to the array
+
+//Function - movement 
+  //allows the player and computers to move one unit based on its direction 
+
+// Function - Computer bubble change color and direction 
+// Every interval in time, the bubble's color will change color
+// Every interval in time, the bubble will change direction
+
+
+
+// Function - check for computer bubble collision
+// if the a computer bubble next step hits another computer bubble, then change the computer bubbles direction 
+
+
+
+// Function - check computer-player bubble collision
+// if the player bubble occupies the same space as a computer bubble
+  // if same color - score ++, computer bubble is regenerated
+  // if not same color, life -- computer bubble is regenerated
+  
+  
+  
+//Function - check border collision 
+  //if player bubble hits the border and tries to keep going, nothing happens
+  //if computer bubble hits the border, change direction 
+ 
+//Function - KeyReader
+  //takes in user input and updates the player direction 
+  
