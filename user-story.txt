@@ -1,0 +1,21 @@
+Starting page
+- GBA Interface
+- read the rules
+- pick a color to Start
+- maxScore 
+- start button
+- When I hit the start button, I want to go the Game Page
+
+
+Game page
+- be able to move my character
+- See my current maxScore
+- See my current life
+- When i bump into the same color circle, I want to see my score increase
+- When i bump into a different color circle, I want to see my life decrease
+- When I run out of life, I want to got to the Game Over page
+
+Game Over page
+- display score
+- display max score
+- i want the option to play again
