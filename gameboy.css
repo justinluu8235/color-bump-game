@@ -1,0 +1,78 @@
+body{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+
+}
+.gba{
+    width:700px;
+    height: 900px;
+    background-color: #88E261;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+.gba-screen{
+    margin-top: 50px;
+    width: 600px;
+    height: 600px;
+    background-color:#2F322E;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.canvas{
+    width: 550px;
+    height: 400px;
+    background-color: white;
+    margin-top: 15px;
+}
+canvas{
+    width:550px;
+    height:400px;
+    background-color: #222;
+}
+.scoreboard{
+    width: 550px;
+    height: 75px; 
+    background-color: tan;
+}
+
+.gameboy-text{
+    width: 400px;
+    height: 50px;
+    margin-top: 15px;
+    background-color: plum;
+}
+#text{
+    text-align:center;
+}
+.gba-buttons{
+    height: 150px;
+    width: 400px;
+    background-color: yellow;
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content:space-between;
+
+}
+.gba-navigation{
+    margin-left:20px;
+    height: 100px;
+    width: 100px;
+    background-color:aqua;
+}
+.gba-a-b{
+    margin-right:20px;
+    height: 100px;
+    width: 100px;
+    background-color:aqua;
+}
+
+.select-start-button{
+    background-color:green;
+    height:50px;
+    width:  250px;
+}

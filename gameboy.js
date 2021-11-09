@@ -7,7 +7,7 @@ let intWidth = parseInt(canvasWidth);
 
 
 //Set up initial fields
-let unitSize = 20;
+let unitSize = 15;
 let computerBubbles = [];
 let score = 0;
 let lifePoints = 5;
@@ -23,7 +23,7 @@ let randomDirection = Math.round(Math.random() * (directionChoices.length - 1));
 let ctx = game.getContext('2d');
 ctx.fillStyle = "white";
 ctx.strokeStyle = "red";
-ctx.lineWidth = 5;
+ctx.lineWidth = 1;
 
 //setting up the canvas
 gameCanvas.setAttribute('height', canvasHeight);
@@ -53,8 +53,9 @@ class Player {
     constructor(color) {
         this.width = unitSize;
         this.height = unitSize;
-        this.playerX = (Math.round(intWidth / unitSize)) / 2 * unitSize;
-        this.playerY = (Math.round(intHeight / unitSize)) / 2 * unitSize;
+        this.playerX = (Math.round(intWidth / unitSize/2))  * unitSize;
+        this.playerY = (Math.round(intHeight / unitSize/2))  * unitSize;
+        console.log(this.playerX, this.playerY);
         this.color = color;
 
         this.render = function () {
@@ -82,8 +83,6 @@ class Computer {
             ctx.fillRect(this.computerX, this.computerY, unitSize, unitSize);
         }
     }
-
-
 
 }
 
@@ -114,9 +113,10 @@ function gameLoop() {
         for (let i = 0; i < computerBubbles.length; i++) {
             computerBubbles[i].render();
         }
-        console.log(score, lifePoints);
+     
         drawGrid();
         checkPlayerCollision();
+        
     }
 
 

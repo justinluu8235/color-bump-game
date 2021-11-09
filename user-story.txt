@@ -1,7 +1,12 @@
 Starting page
 - GBA Interface
+    - develop CSS layout
 - read the rules
+    - write out rules
+    - integrate to HTML or Javascript to display
 - pick a color to Start
+    - have a good visual for selection 
+    - will have to integrate into javascript for click input
 - maxScore 
 - start button
 - When I hit the start button, I want to go the Game Page
@@ -10,12 +15,26 @@ Starting page
 Game page
 - be able to move my character
 - See my current maxScore
+    - integrate into local storage
 - See my current life
+- when i bump into any circle, a new instance will appear elsewhere
 - When i bump into the same color circle, I want to see my score increase
 - When i bump into a different color circle, I want to see my life decrease
+- after x amount a time, a new circle will be generated
 - When I run out of life, I want to got to the Game Over page
+
+
+
 
 Game Over page
 - display score
 - display max score
 - i want the option to play again
+
+
+Timeline
+- 1 day - Test functionality of javascript in a test canvas
+- 1 day - create CSS pages for display and hiding 
+- 1 day - decorate game with animations 
+- 1 day - create better effects for details (fonts, color, etc)
+- 1 day - buffer...
