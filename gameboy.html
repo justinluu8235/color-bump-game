@@ -5,26 +5,105 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ColorBump</title>
-    <link rel="stylesheet" href="./gameboy.css">
+    <link rel="stylesheet" href="./gameboy.css" />
   </head>
   <body>
+    <img id="red-ghost" class="hidden" src="./redGhost.png" alt="red-ghost">
+    <img id="skyBackground" class="hidden" src="./skyBackground.png" alt="red-ghost">
     <div class="gba">
       <div class="gba-screen">
-        <div class="canvas">
-            <main>
-                <canvas id="game"><!-- play it, a game --></canvas>
-            </main>
+        <div class="start-screen">
+          <div class="game-title">
+            <h1>Color Bump!</h1>
+          </div>
+          <div class="instructions">
+            <p>
+              How to Play: Bump into the same color squares to score points. Be
+              careful! - they change colors after a while... and direction! Pick
+              a color below for yourself to start!
+            </p>
+          </div>
+          <div class="color-selection">
+            <div class="square" id='cornflowerblue-square'>
+              <div class="cornflowerblue circle"></div>
+            </div>
+            <div class="square" id='orange-square'>
+              <div class="orange circle"></div>
+            </div>
+            <div class="square" id='darkseagreen-square'>
+              <div class="darkseagreen circle"></div>
+            </div>
+            <div class="square" id='firebrick-square'>
+              <div class="firebrick circle"></div>
+            </div>
+            <div class="square" id='pink-square'>
+              <div class="pink circle"></div>
+            </div>
+          </div>
+
+          <div class="start">
+            <input type="button" value="Start!" class="start-button" />
+          </div>
         </div>
-        <div class="scoreboard"></div>
+
+        <div class="game-screen hidden">
+          <div class="canvas">
+            <main>
+              <canvas id="game"><!-- play it, a game --></canvas>
+            </main>
+          </div>
+          <div class="scoreboard">
+            <div class="score">Score: XX</div>
+            <div class="max-score">Max Score: XX</div>
+            <div class="life">Life: XX</div>
+          </div>
+        </div>
+
+        <div class="game-over hidden">
+          <div class="game-over-text">
+            <h1>Game Over!</h1>
+          </div>
+          <div class="description">
+            <p>Nice try! Let's face it, you never stood a chance...</p>
+          </div>
+          <div class="score-results">
+            <div class="score">Score: XX</div>
+            <div class="max-score">Max Score: XX</div>
+          </div>
+
+          <div class="restart">
+            <input type="button" value="Play Again!" class="restart-button" />
+            <input type="button" value="Reselect Color" class="home-button" />
+          </div>
+        </div>
+
         <div class="gameboy-text">
-            <p id='text'>Gameboy Color</p>
+          <div id="logo">
+            <span class="logoName"><i>GAMEBOY</i></span>
+            <span class="logoModel">
+              <b>
+                <span id="c">C</span><span id="o1">O</span><span id="l">L</span><span id="o2">O</span><span id="r">R</span>
+              </b>
+            </span>
+          </div>
+          <!-- <img src="./gba-pic.jpg" alt="gameboy color text" /> -->
+          <!-- <p id='text'>Gameboy Color</p> -->
         </div>
       </div>
       <div class="gba-buttons">
-        <div class="gba-navigation"></div>
-        <div class="gba-a-b"></div>
+        <div class="gba-navigation">
+          <div class="up-down-button"></div>
+          <div class="left-right-button"></div>
+        </div>
+        <div class="gba-a-b">
+            <div class="a-button"><span class="letters">A</span></div>
+            <div class="b-button"><span class="letters">B</span></div>
+        </div>
       </div>
-      <div class="select-start-button"></div>
+      <div class="select-start-button">
+        <div class="select-button"></div>
+        <div class="gba-start-button"></div>
+      </div>
     </div>
     <script src="./gameboy.js"></script>
   </body>

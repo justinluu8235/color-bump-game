@@ -4,19 +4,68 @@ let canvasHeight = getComputedStyle(gameCanvas)['height'];
 let canvasWidth = getComputedStyle(gameCanvas)['width'];
 let intHeight = parseInt(canvasHeight);
 let intWidth = parseInt(canvasWidth);
+let startButton = document.querySelector('.start-button');
+let gameScreen = document.querySelector('.game-screen');
+let startScreen = document.querySelector('.start-screen');
+let gameOverScreen = document.querySelector('.game-over');
+let playAgainButton = document.querySelector('.restart-button');
+let goHomeButton = document.querySelector('.home-button');
+
+
+//Scores and Life
+let scoreDisplay = document.querySelectorAll('.score');
+let lifeDisplay = document.querySelector('.life');
+let maxScoreDisplay = document.querySelectorAll('.max-score');
 
 
 //Set up initial fields
-let unitSize = 15;
+let unitSize = 25;
 let computerBubbles = [];
 let score = 0;
 let lifePoints = 5;
 let player;
 let computer;
-let colorChoices = ["blue", "orange", "green", "red", "pink"];
+let colorChoices = ["cornflowerblue", "orange", "darkseagreen", "firebrick", "pink"];
 let randomColor = Math.round(Math.random() * (colorChoices.length - 1));
 let directionChoices = ["U", "D", "L", "R"];
 let randomDirection = Math.round(Math.random() * (directionChoices.length - 1));
+let change;
+let change1;
+let changeC;
+let changeD;
+let addBubbles;
+let background = document.querySelector('#skyBackground');
+
+
+//Set up local storage for max score
+let maxScore = 0;
+let maxScoreString = maxScore.toString();
+localStorage.setItem('maxScore', maxScoreString);
+
+
+
+//User Color Selection!
+let playerColorChoice;
+let colorChoiceList = document.querySelectorAll('.circle');
+
+for(let i=0; i<colorChoiceList.length; i++){
+    colorChoiceList[i].onclick = function(){
+        for(let i=0; i<colorChoiceList.length;i++){
+            let square = document.querySelector('#'+colorChoiceList[i].classList[0]+'-square');
+            square.style.backgroundColor = "white";
+        }
+        let square = document.querySelector('#'+colorChoiceList[i].classList[0]+'-square')
+        square.style.backgroundColor = "grey";
+        playerColorChoice=colorChoiceList[i].classList[0];
+      
+    
+    }
+}
+if(playerColorChoice === undefined){
+    playerColorChoice = "cornflowerblue";
+}
+
+
 
 
 //Set up game context
@@ -30,7 +79,7 @@ gameCanvas.setAttribute('height', canvasHeight);
 gameCanvas.setAttribute('width', canvasWidth);
 
 
-
+/*
 window.addEventListener("DOMContentLoaded", (e) => {
     player = new Player("blue");
     computer = new Computer();
@@ -41,9 +90,54 @@ window.addEventListener("DOMContentLoaded", (e) => {
     const change1 = setInterval(gameLoop1, 200);
     const changeC = setInterval(changeColor, 5000);
     const changeD = setInterval(changeDirection, 2500);
-    const addBubbles = setInterval(addComputerBubble, 20000);
+    const addBubbles = setInterval(addComputerBubble, 2000);
 
 })
+*/
+
+
+//Start button click to start game 
+startButton.addEventListener('click', function(){
+    gameScreen.classList.toggle("hidden");
+    startScreen.classList.toggle("hidden");
+    
+    gameStart();
+})
+
+playAgainButton.addEventListener('click', function(){
+    gameScreen.classList.toggle("hidden");
+    gameOverScreen.classList.toggle("hidden");
+    
+    gameStart();
+})
+
+goHomeButton.addEventListener('click', function(){
+    gameOverScreen.classList.toggle("hidden");
+    startScreen.classList.toggle("hidden");
+})
+
+
+function gameStart(){
+ 
+    score = 0;
+    lifePoints = 5;
+    computerBubbles = [];
+
+    player = new Player(playerColorChoice);
+    computer = new Computer();
+    computerBubbles.push(computer);
+    computer = new Computer();
+    computerBubbles.push(computer);
+    !change ? change=setInterval(gameLoop, 120) : null;
+    !change1 ? change1=setInterval(gameLoop1, 500) : null;
+    !changeC ? changeC=setInterval(changeColor, 5000) : null;
+    !changeD ? changeD=setInterval(changeDirection, 2500) : null;
+    !addBubbles ? addBubbles = setInterval(addComputerBubble, 2000) : null;
+    
+    
+}
+
+
 
 //for getting key info
 document.addEventListener('keydown', keyAdapter);
@@ -55,7 +149,7 @@ class Player {
         this.height = unitSize;
         this.playerX = (Math.round(intWidth / unitSize/2))  * unitSize;
         this.playerY = (Math.round(intHeight / unitSize/2))  * unitSize;
-        console.log(this.playerX, this.playerY);
+      
         this.color = color;
 
         this.render = function () {
@@ -77,7 +171,7 @@ class Computer {
         this.color = colorChoices[randomColor];
         this.direction = directionChoices[randomDirection];
 
-        console.log(this.color, this.direction);
+       
         this.render = function () {
             ctx.fillStyle = this.color;
             ctx.fillRect(this.computerX, this.computerY, unitSize, unitSize);
@@ -109,16 +203,18 @@ function addComputerBubble() {
 function gameLoop() {
     if (lifePoints > 0) {
         ctx.clearRect(0, 0, game.width, game.height);
+       ctx.drawImage(background, 0,0,game.width, game.height);
         player.render();
         for (let i = 0; i < computerBubbles.length; i++) {
             computerBubbles[i].render();
         }
-     
-        drawGrid();
+        //drawGrid();
         checkPlayerCollision();
-        
+        scoreDisplay[0].textContent = "Score: " + score;
+        lifeDisplay.textContent = "Life: " + lifePoints;
+        maxScoreDisplay[0].textContent = "Max Score: " + localStorage.getItem('maxScore');
     }
-
+   
 
 }
 
@@ -235,6 +331,11 @@ function checkPlayerCollision() {
             //if its the same color
             if (computerBubbles[i].color === player.color) {
                 score++;
+                if(score > maxScore){
+                    maxScore = score;
+                    maxScoreString = maxScore.toString();
+                    localStorage.setItem("maxScore", maxScoreString);
+                }
                 computerBubbles[i] = new Computer();
             }
             else {
@@ -245,6 +346,14 @@ function checkPlayerCollision() {
         }
        
     }
+    if(lifePoints<=0){
+        gameScreen.classList.toggle("hidden");
+        gameOverScreen.classList.toggle("hidden");
+        scoreDisplay[1].textContent = "Score: " + score;
+        maxScoreDisplay[1].textContent = "Max Score: " + localStorage.getItem('maxScore');
+       
+    }
+    
 
 
 }

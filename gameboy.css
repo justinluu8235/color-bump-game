@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
 body{
     display:flex;
     flex-direction: column;
@@ -8,6 +10,7 @@ body{
     width:700px;
     height: 900px;
     background-color: #88E261;
+    border-radius:30px;
     display:flex;
     flex-direction: column;
     align-items:center;
@@ -17,41 +20,224 @@ body{
     width: 600px;
     height: 600px;
     background-color:#2F322E;
+    border-radius:15px;
     display:flex;
     flex-direction: column;
     align-items:center;
+}
+
+.start-screen, .game-over{
+    width:550px;
+    height: 475px;
+    margin-top: 15px;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+     background-color: white; 
+}
+
+.game-title, .game-over-text{
+    height: 80px;
+    width: 300px;
+    margin-top: 15px;
+    /* background-color:red; */
+}
+.instructions, .description{
+    width: 500px;
+    height: 200px;
+    margin-top: 15px;
+    /* background-color:cyan; */
+}
+.description{
+    height:100px;
+}
+.score-results{
+    height: 75px;
+    width: 250px;
+    margin-top: 25px;
+    /* background-color:blue; */
+}
+.color-selection{
+    height: 75px;
+    width: 350px;
+    margin-top: 35px;
+    /* background-color:violet; */
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.circle{
+    height: 50px;
+    width:50px;
+    border-radius:50%;
+  
+}
+.square{
+    height:50px;
+    width:50px; 
+    
+}
+.cornflowerblue{
+    background-color:cornflowerblue;
+}
+.orange{
+    background-color: orange;
+}
+.darkseagreen{
+    background-color:darkseagreen;
+}
+.firebrick{
+    background-color:firebrick;
+}
+.pink{
+    background-color: pink;
+}
+
+.start{
+    height:30px; 
+    width: 200px;
+    margin-top:15px;
+    /* background-color: yellow; */
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+.restart{
+    height:30px; 
+    width: 400px;
+    margin-top:15px;
+    /* background-color: yellow; */
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+h1,p{
+    text-align: center;
+    font-family: 'Architects Daughter', cursive;
+    color:#2F322E;
+    font-size:30px;
+}
+
+h1{
+    
+    font-size: 50px;
+}
+
+input{
+    width: 150px; 
+    height: 25px;
+    background-color: darkgray;
+    border-radius:10px;
 }
 
 .canvas{
     width: 550px;
     height: 400px;
     background-color: white;
-    margin-top: 15px;
+   
+    
 }
 canvas{
     width:550px;
     height:400px;
     background-color: #222;
+    
 }
 .scoreboard{
+    display:flex;
+    display:row;
+    align-items:center;
+    justify-content:space-between;
     width: 550px;
     height: 75px; 
-    background-color: tan;
+    background-color: #222;
+    color:white;
+}
+
+
+.score,.max-score{
+    height:20px;
+    width: 150px;
+    padding-left:20px;
+    font-size:20px;
+    text-align:center;
+    font-family: 'Architects Daughter', cursive;
+}
+.life{
+    height:20px;
+    width: 100px;
+    font-size:20px;
+    
+}
+img{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+#score-text{
+    position:relative;
 }
 
 .gameboy-text{
     width: 400px;
     height: 50px;
     margin-top: 15px;
-    background-color: plum;
+    /* background-color: plum; */
+}
+
+
+#logo {
+    /* border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    -o-border-radius: 1px; */
+  font-size:50px;
+    text-align: center;
+
+}
+
+.logoName {
+    color: #bdc6d4;
+    font-family: Gill Sans;
+}
+
+.logoModel {
+    font-family: Comic Sans MS;
+}
+
+.logoModel #c {
+    color: #7b1e57;
+}
+
+.logoModel #o1 {
+    color: #56527d;
+}
+
+.logoModel #l {
+    color: #7d9273;
+}
+
+.logoModel #o2 {
+    color: #c4c470;
+}
+
+.logoModel #r {
+    color: #27619d;
 }
 #text{
     text-align:center;
 }
 .gba-buttons{
     height: 150px;
-    width: 400px;
-    background-color: yellow;
+    width: 550px;
+    /* background-color: yellow; */
     display:flex;
     flex-direction: row;
     align-items:center;
@@ -62,17 +248,81 @@ canvas{
     margin-left:20px;
     height: 100px;
     width: 100px;
-    background-color:aqua;
+    /* background-color:aqua; */
+}
+.up-down-button{
+    position:relative;
+    left:30%;
+    background-color: #222;
+    width: 20px;
+    height: 80px;
+}
+.left-right-button{
+    position:relative;
+   bottom: 50%;
+    background-color: #222;
+    width: 80px;
+    height: 20px;
 }
 .gba-a-b{
     margin-right:20px;
     height: 100px;
     width: 100px;
-    background-color:aqua;
+    /* background-color:aqua; */
 }
 
 .select-start-button{
-    background-color:green;
+    /* background-color:green; */
     height:50px;
-    width:  250px;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.a-button{
+    position:relative;
+    height:45px;
+    width:45px;
+    background-color:black;
+    border-radius:50%;
+    left: 50px;
+    display:flex;
+    flex: row;
+    align-items: center;
+    justify-content: center;
+}
+.b-button{
+    position:relative;
+    height:45px;
+    width:45px;
+    border-radius:50%;
+    background-color:black;
+    right: 10px;
+    display:flex;
+    flex: row;
+    align-items: center;
+    justify-content: center;
+}
+.select-button,.gba-start-button{
+    height:15px;
+    width: 65px;
+    border-radius: 50%;
+    background-color:black;
+}
+
+.letters{
+    color:grey;
+    font-size:25px;
+}
+
+.game-screen.hidden,
+.start-screen.hidden, 
+.game-over.hidden{
+  display: none;
+}
+
+.hidden{
+    display:none;
 }
