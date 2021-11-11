@@ -8,18 +8,46 @@
     <link rel="stylesheet" href="./gameboy.css" />
   </head>
   <body>
-    <img id="red-ghost" class="hidden" src="./redGhost.png" alt="red-ghost">
+    <!-- <iframe src="silence.mp3" allow="autoplay" id="audio" style="display: none"> -->
+      <audio controls autoplay id="music" class="hidden">
+        <source src="./audio/elevator-music.mp3" type="audio/mpeg">
+    </audio>
+   
+    <!-- </iframe> -->
+    
+    <!-- <embed src="./elevator-music.mp3"  autostart="hidden" loop="true"> -->
+    <img id="blue-ghost" class="hidden" src="./pac-images/blue-ghost.png" alt="red-ghost">
+    <img id="green-ghost" class="hidden" src="./pac-images/green-ghost.png" alt="green-ghost">
+    <img id="orange-ghost" class="hidden" src="./pac-images/orange-ghost.png" alt="orange-ghost">
+    <img id="pink-ghost" class="hidden" src="./pac-images/pink-ghost.png" alt="pink-ghost">
+    <img id="red-ghost" class="hidden" src="./pac-images/red-ghost.png" alt="red-ghost">
+
+    <img id="blue-pacman" class="hidden" src="./pac-images/blue-pacman.png" alt="blue-pacman">
+    <img id="green-pacman" class="hidden" src="./pac-images/green-pacman.png" alt="green-pacman">
+    <img id="orange-pacman" class="hidden" src="./pac-images/orange-pacman.png" alt="orange-pacman">
+    <img id="pink-pacman" class="hidden" src="./pac-images/pink-pacman.png" alt="pink-pacman">
+    <img id="red-pacman" class="hidden" src="./pac-images/red-pacman.png" alt="red-pacman">
     <img id="skyBackground" class="hidden" src="./skyBackground.png" alt="red-ghost">
     <div class="gba">
       <div class="gba-screen">
+
         <div class="start-screen">
-          <div class="game-title">
-            <h1>Color Bump!</h1>
+          <div class="game-title-row">
+            <div class="pacman-decor-1">
+              <img id="pink-ghost-decor"src="./pac-images/pink-ghost.png" alt="pink-ghost">
+            </div>
+            <div class="game-title">
+              <h1>Color-Pac!</h1>
+            </div>
+            <div class="pacman-decor-2">
+              <img id="blue-ghost-decor" src="./pac-images/blue-ghost.png" alt="red-ghost">
+            </div>
           </div>
+          
           <div class="instructions">
             <p>
               How to Play: Bump into the same color squares to score points. Be
-              careful! - they change colors after a while... and direction! Pick
+              careful! - they change colors after a while... and direction! <br>Pick
               a color below for yourself to start!
             </p>
           </div>
@@ -40,10 +68,18 @@
               <div class="pink circle"></div>
             </div>
           </div>
-
-          <div class="start">
-            <input type="button" value="Start!" class="start-button" />
+          <div class="start-row">
+            <div class="pacman-decor-3">
+              <img id="green-pacman-decor" src="./pac-images/green-pacman.png" alt="green-pacman">
+            </div>
+            <div class="start">
+              <input type="button" value="Start!" class="start-button" />
+            </div>
+            <div class="pacman-decor-4">
+              <img id="orange-pacman-decor" src="./pac-images/orange-pacman.png" alt="orange-pacman">
+            </div>
           </div>
+          
         </div>
 
         <div class="game-screen hidden">

@@ -11,6 +11,35 @@ let gameOverScreen = document.querySelector('.game-over');
 let playAgainButton = document.querySelector('.restart-button');
 let goHomeButton = document.querySelector('.home-button');
 
+//setting up audio
+let music = document.querySelector('#music');
+
+let hurtSound = new Audio();
+let sound1= document.createElement("source");
+sound1.type = "audio/mpeg";
+sound1.src = "./audio/pacman-lose-life.mp3" ;
+hurtSound.appendChild(sound1);
+
+let scoreSound = new Audio();
+let sound2= document.createElement("source");
+sound2.type = "audio/mpeg";
+sound2.src = "./audio/gain-score.mp3" ;
+scoreSound.appendChild(sound2);
+
+//get pacman and ghost images
+let background = document.querySelector('#skyBackground');
+let bluePacman = document.querySelector('#blue-pacman');
+let greenPacman = document.querySelector('#green-pacman');
+let orangePacman = document.querySelector('#orange-pacman');
+let pinkPacman = document.querySelector('#pink-pacman');
+let redPacman = document.querySelector('#red-pacman');
+let blueGhost = document.querySelector('#blue-ghost');
+let greenGhost = document.querySelector('#green-ghost');
+let orangeGhost = document.querySelector('#orange-ghost');
+let pinkGhost = document.querySelector('#pink-ghost');
+let redGhost = document.querySelector('#red-ghost');
+
+
 
 //Scores and Life
 let scoreDisplay = document.querySelectorAll('.score');
@@ -34,7 +63,8 @@ let change1;
 let changeC;
 let changeD;
 let addBubbles;
-let background = document.querySelector('#skyBackground');
+
+let playerIntervalTime = 120;
 
 
 //Set up local storage for max score
@@ -48,20 +78,20 @@ localStorage.setItem('maxScore', maxScoreString);
 let playerColorChoice;
 let colorChoiceList = document.querySelectorAll('.circle');
 
-for(let i=0; i<colorChoiceList.length; i++){
-    colorChoiceList[i].onclick = function(){
-        for(let i=0; i<colorChoiceList.length;i++){
-            let square = document.querySelector('#'+colorChoiceList[i].classList[0]+'-square');
+for (let i = 0; i < colorChoiceList.length; i++) {
+    colorChoiceList[i].onclick = function () {
+        for (let i = 0; i < colorChoiceList.length; i++) {
+            let square = document.querySelector('#' + colorChoiceList[i].classList[0] + '-square');
             square.style.backgroundColor = "white";
         }
-        let square = document.querySelector('#'+colorChoiceList[i].classList[0]+'-square')
+        let square = document.querySelector('#' + colorChoiceList[i].classList[0] + '-square')
         square.style.backgroundColor = "grey";
-        playerColorChoice=colorChoiceList[i].classList[0];
-      
-    
+        playerColorChoice = colorChoiceList[i].classList[0];
+
+
     }
 }
-if(playerColorChoice === undefined){
+if (playerColorChoice === undefined) {
     playerColorChoice = "cornflowerblue";
 }
 
@@ -97,28 +127,30 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
 
 //Start button click to start game 
-startButton.addEventListener('click', function(){
+startButton.addEventListener('click', function () {
     gameScreen.classList.toggle("hidden");
     startScreen.classList.toggle("hidden");
-    
+
     gameStart();
 })
 
-playAgainButton.addEventListener('click', function(){
+playAgainButton.addEventListener('click', function () {
     gameScreen.classList.toggle("hidden");
     gameOverScreen.classList.toggle("hidden");
-    
+
     gameStart();
 })
 
-goHomeButton.addEventListener('click', function(){
+goHomeButton.addEventListener('click', function () {
     gameOverScreen.classList.toggle("hidden");
     startScreen.classList.toggle("hidden");
 })
 
 
-function gameStart(){
- 
+function gameStart() {
+    music.play();
+  
+    music.volume = 0.2;
     score = 0;
     lifePoints = 5;
     computerBubbles = [];
@@ -128,13 +160,18 @@ function gameStart(){
     computerBubbles.push(computer);
     computer = new Computer();
     computerBubbles.push(computer);
-    !change ? change=setInterval(gameLoop, 120) : null;
+    /*
+    !change ? change=setInterval(gameLoop, playerIntervalTime ) : null;
     !change1 ? change1=setInterval(gameLoop1, 500) : null;
     !changeC ? changeC=setInterval(changeColor, 5000) : null;
     !changeD ? changeD=setInterval(changeDirection, 2500) : null;
     !addBubbles ? addBubbles = setInterval(addComputerBubble, 2000) : null;
-    
-    
+    */
+    change = setInterval(gameLoop, playerIntervalTime);
+    change1 = setInterval(gameLoop1, 500);
+    changeC = setInterval(changeColor, 5000);
+    changeD = setInterval(changeDirection, 2500);
+    addBubbles = setInterval(addComputerBubble, 2000);
 }
 
 
@@ -147,17 +184,42 @@ class Player {
     constructor(color) {
         this.width = unitSize;
         this.height = unitSize;
-        this.playerX = (Math.round(intWidth / unitSize/2))  * unitSize;
-        this.playerY = (Math.round(intHeight / unitSize/2))  * unitSize;
-      
+        this.playerX = (Math.round(intWidth / unitSize / 2)) * unitSize;
+        this.playerY = (Math.round(intHeight / unitSize / 2)) * unitSize;
         this.color = color;
-
+        this.pacmanImage = getPacman(this.color);
         this.render = function () {
-            ctx.fillStyle = this.color;
-            ctx.fillRect(this.playerX, this.playerY, unitSize, unitSize);
+            //ctx.fillStyle = this.color;
+       
+            ctx.drawImage(this.pacmanImage, this.playerX, this.playerY, unitSize, unitSize);
+            //ctx.fillRect(this.playerX, this.playerY, unitSize, unitSize);
         }
 
     }
+
+}
+
+function getPacman(color) {
+    switch (color) {
+        case 'cornflowerblue':
+            return bluePacman;
+            break;
+        case 'orange':
+            return orangePacman;
+            break;
+        case 'darkseagreen':
+            return greenPacman;
+            break;
+        case 'firebrick':
+            return redPacman;
+            break;
+        case 'pink':
+            return pinkPacman;
+            break;
+    }
+}
+
+function rotateImage(){
 
 }
 
@@ -170,15 +232,41 @@ class Computer {
         this.computerY = Math.round(Math.random() * intHeight / unitSize) * unitSize;
         this.color = colorChoices[randomColor];
         this.direction = directionChoices[randomDirection];
+        
 
-       
         this.render = function () {
-            ctx.fillStyle = this.color;
-            ctx.fillRect(this.computerX, this.computerY, unitSize, unitSize);
+            //ctx.fillStyle = this.color;
+            let ghostImage = getGhost(this.color);
+            ctx.drawImage(ghostImage, this.computerX, this.computerY, unitSize, unitSize)
+            //ctx.fillRect(this.computerX, this.computerY, unitSize, unitSize);
         }
     }
 
 }
+
+function getGhost(color) {
+    switch (color) {
+        case 'cornflowerblue':
+            return blueGhost;
+            break;
+        case 'orange':
+            return orangeGhost;
+            break;
+        case 'darkseagreen':
+            return greenGhost;
+            break;
+        case 'firebrick':
+            return redGhost;
+            break;
+        case 'pink':
+            return pinkGhost;
+            break;
+    }
+}
+
+
+
+
 
 function changeDirection() {
     for (let i = 0; i < computerBubbles.length; i++) {
@@ -203,18 +291,19 @@ function addComputerBubble() {
 function gameLoop() {
     if (lifePoints > 0) {
         ctx.clearRect(0, 0, game.width, game.height);
-       ctx.drawImage(background, 0,0,game.width, game.height);
+        //ctx.drawImage(background, 0, 0, game.width, game.height);
         player.render();
         for (let i = 0; i < computerBubbles.length; i++) {
             computerBubbles[i].render();
         }
+
         //drawGrid();
         checkPlayerCollision();
         scoreDisplay[0].textContent = "Score: " + score;
         lifeDisplay.textContent = "Life: " + lifePoints;
         maxScoreDisplay[0].textContent = "Max Score: " + localStorage.getItem('maxScore');
     }
-   
+
 
 }
 
@@ -231,7 +320,9 @@ function keyAdapter(e) {
                 break;
             }
             else {
+       
                 player.playerY -= unitSize;
+                
             }
             break;
         case 'a':
@@ -330,30 +421,44 @@ function checkPlayerCollision() {
             computerBubbles[i].computerY === player.playerY) {
             //if its the same color
             if (computerBubbles[i].color === player.color) {
+                scoreSound.volume = 0.2;
+                scoreSound.play();
                 score++;
-                if(score > maxScore){
+                if (score > maxScore) {
                     maxScore = score;
                     maxScoreString = maxScore.toString();
                     localStorage.setItem("maxScore", maxScoreString);
                 }
                 computerBubbles[i] = new Computer();
+                /*if (score>2){
+                    playerIntervalTime = 20;
+                }
+                if(score>4){
+                    playerIntervalTime = 40;
+                }*/
             }
             else {
                 lifePoints--;
-
+                hurtSound.volume = 0.1;
+                hurtSound.play();
                 computerBubbles[i] = new Computer();
             }
         }
-       
+
     }
-    if(lifePoints<=0){
+    if (lifePoints <= 0) {
         gameScreen.classList.toggle("hidden");
         gameOverScreen.classList.toggle("hidden");
         scoreDisplay[1].textContent = "Score: " + score;
         maxScoreDisplay[1].textContent = "Max Score: " + localStorage.getItem('maxScore');
-       
+        clearInterval(change);
+        clearInterval(change1);
+        clearInterval(changeC);
+        clearInterval(changeD);
+        clearInterval(addBubbles);
+
     }
-    
+
 
 
 }

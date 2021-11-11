@@ -4,6 +4,8 @@ body{
     display:flex;
     flex-direction: column;
     align-items:center;
+    background-image: url("backgroun1.jpeg");
+    background-size:cover;
 
 }
 .gba{
@@ -35,7 +37,14 @@ body{
     align-items:center;
      background-color: white; 
 }
-
+.game-title-row{
+    height:80px;
+    width:500px;
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+}
 .game-title, .game-over-text{
     height: 80px;
     width: 300px;
@@ -60,7 +69,8 @@ body{
 .color-selection{
     height: 75px;
     width: 350px;
-    margin-top: 35px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     /* background-color:violet; */
     display:flex;
     flex-direction: row;
@@ -94,7 +104,15 @@ body{
 .pink{
     background-color: pink;
 }
+.start-row{
+    height:30px; 
+    width: 500px;
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
 
+}
 .start{
     height:30px; 
     width: 200px;
@@ -121,7 +139,7 @@ h1,p{
     text-align: center;
     font-family: 'Architects Daughter', cursive;
     color:#2F322E;
-    font-size:30px;
+    font-size:25px;
 }
 
 h1{
@@ -315,6 +333,34 @@ img{
 .letters{
     color:grey;
     font-size:25px;
+}
+#pink-ghost-decor{
+    height:40px;
+    width:40px;
+    right: 25px;
+    transform: rotate(-30deg);
+}
+#blue-ghost-decor{
+    height:40px;
+    width:40px;
+    left:25px;
+    transform: rotate(30deg);
+}
+
+#green-pacman-decor{
+    height:40px;
+    width:40px;
+    right: 75px;
+    top: 15px;
+    
+}
+
+#orange-pacman-decor{
+    height:40px;
+    width:40px;
+    left: 75px;
+    top: 15px;
+    transform: rotate(180deg);
 }
 
 .game-screen.hidden,
