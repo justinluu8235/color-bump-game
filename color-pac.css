@@ -38,7 +38,7 @@ body{
      background-color: white; 
 }
 .game-title-row{
-    height:80px;
+    height:100px;
     width:500px;
     display:flex;
     flex-direction: row;
@@ -51,6 +51,15 @@ body{
     margin-top: 15px;
     /* background-color:red; */
 }
+.game-over-images{
+    height: 80px;
+    width: 350px;
+    /* background-color:yellow; */
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
 .instructions, .description{
     width: 500px;
     height: 200px;
@@ -58,12 +67,17 @@ body{
     /* background-color:cyan; */
 }
 .description{
+    width: 300px;
     height:100px;
+}
+.dead-pacmen{
+    height: 120px;
+    width:120px;
 }
 .score-results{
     height: 75px;
     width: 250px;
-    margin-top: 25px;
+    margin-top: 15px;
     /* background-color:blue; */
 }
 .color-selection{
@@ -181,16 +195,31 @@ canvas{
 
 .score,.max-score{
     height:20px;
-    width: 150px;
+    width: 130px;
+    padding-bottom:10px;
     padding-left:20px;
     font-size:20px;
+    color:royalblue;
+    text-align:center;
+    font-family: 'Architects Daughter', cursive;
+}
+#game-over-score, #game-over-max-score{
+    height:20px;
+    width: 250px;
+    padding-bottom:10px;
+    padding-left:20px;
+    font-size:35px;
+    color:royalblue;
     text-align:center;
     font-family: 'Architects Daughter', cursive;
 }
 .life{
     height:20px;
-    width: 100px;
+    width: 150px;
+    padding-left:20px;
     font-size:20px;
+    font-family: 'Architects Daughter', cursive;
+    color:royalblue;
     
 }
 img{
