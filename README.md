@@ -156,3 +156,26 @@ ctx.drawImage(ghostImage, this.computerX, this.computerY, unitSize, unitSize)
 - Planning process is so important for effective code sessions. CSS - sketching out div blocks and wire-frames. JS - user story and writing out individual functions 
 - Setting up code for the ability to revise or add functionality. Trying my best to isolate changes to one or only a few locations when adjusting functionality. 
 - Breaking down canvas movements to the most basic logic was fun to see - makes you think anything is possible!
+
+
+# List of classes and functions
+| **CLASSES**                                | **Description**                                                      |
+| ------------------------------------------ | -------------------------------------------------------------------- |
+| `class Player`                            | Initializes a location, size, and image for rendering, as well as a field for degree of rotation for the image|
+| `class Computer`                      | Initializes a location and size for rendering. Initializes a random color and direction for movement                           |
+
+| **FUNCTIONS**                                                         | **Description**                                                                                                              |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Player.render()`                                                              | takes in a degree of rotation and draw a rotated image on the canvas                              |
+| `Computer.render()`             | calls a           `getGhost()` function to get an image and then draws it on the canvas                      |
+| `getPacman(color)`                                                            | Takes a color as a parameter and returns a corresponding pacman image for that color             |
+| `getGhost(colors)`                                                       | Take a color as a parameter and returns a ghost            |
+| `keyAdapter(e)`                                                    | Takes in user input and increments the Player object x and y fields if within canvas. Also adjusts the degRotate field of the Player for rendering a rotated image                                 |
+| `movementHandler()`                                                | Loops through the Computer objects array and based on their direction field, increment their x and y field if within canvas                      |
+| `checkPlayerCollision()` | Loops through the Computer object array and check if they are intersecting with the Player. Update score/life, play sound effects, and update maxScore depending on if the colors are the same. Create a new instance of the Computer object to update the array to 'regenerate' the Computer ghost. Change interface once lifePoints reach 0 |
+| `gameLoop()`                                                            | Main game loop on a Interval - renders Player and Computer objects. Call the `checkPlayerCollision()` function and update scoreboard.                                          |
+| `gameLoop1()`                                              | Game loop that is on an Interval updating the Computer movements (different speed from the player)          |
+| `gameLoop()`                                                          | The primary gameloop that checks game state and then renders, updates, and calls next frame to be painted                    |
+| `changeDirection()`                                                      | Loops through the array of Computer objects and changes their direction to a random one; used on a Interval          |
+| `changeColor()`                                                              | Loops through the array of Computer objects and changes their color to a random one; used on a Interval               |
+| `addComputerbubble()`                                                        | Creates a new Computer object and adds it to an existing computer array                              |

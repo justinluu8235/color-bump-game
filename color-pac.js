@@ -174,8 +174,22 @@ class Player {
         this.playerY = (Math.round(intHeight / unitSize / 2)) * unitSize;
         this.color = color;
         this.pacmanImage = getPacman(this.color);
-        this.render = function () {
+        this.degRotate = 0;
+      
+        this.render = function(deg){
+            //save current canvas so it doesnt rotate everything
+            ctx.save();
+            let rad = deg * (Math.PI)/180;
+            //Translate to center point of the image
+            ctx.translate((this.playerX + unitSize/2), (this.playerY + unitSize/2));
+            //Perform rotation
+            ctx.rotate(deg * 0.01745);
+            //Go back to the top left of canvas
+            ctx.translate(-(this.playerX + unitSize/2), -(this.playerY + unitSize/2));
+            //draw the image
             ctx.drawImage(this.pacmanImage, this.playerX, this.playerY, unitSize, unitSize);
+            //restore the saved canvas 
+            ctx.restore();
         }
 
     }
@@ -280,7 +294,9 @@ function gameLoop() {
         //clear canvas
         ctx.clearRect(0, 0, game.width, game.height);
         //draw player
-        player.render();
+       
+        player.render(player.degRotate);
+        
         //draw computers
         for (let i = 0; i < computerBubbles.length; i++) {
             computerBubbles[i].render();
@@ -317,7 +333,7 @@ function keyAdapter(e) {
                 break;
             }
             else {
-       
+                player.degRotate = 270;
                 player.playerY -= unitSize;
                 
             }
@@ -328,6 +344,7 @@ function keyAdapter(e) {
                 break;
             }
             else {
+                player.degRotate = 180;
                 player.playerX -= unitSize;
             }
 
@@ -338,6 +355,7 @@ function keyAdapter(e) {
                 break;
             }
             else {
+                player.degRotate = 0;
                 player.playerX += unitSize;
             }
             break;
@@ -347,6 +365,7 @@ function keyAdapter(e) {
                 break;
             }
             else {
+                player.degRotate = 90;
                 player.playerY += unitSize;
             }
 
@@ -383,7 +402,7 @@ function movementHandler() {
                 break;
 
             case 'R':
-                //move snake right
+                //move computer bubble right
                 if (computerBubbles[i].computerX + unitSize > intWidth - unitSize) {
                     computerBubbles[i].direction = 'L';
                     break;
@@ -393,7 +412,7 @@ function movementHandler() {
                 }
                 break;
             case 'D':
-                //move snake down
+                //move computer bubble down
                 if (computerBubbles[i].computerY + unitSize > intHeight - unitSize) {
                     computerBubbles[i].direction = 'U';
                     break;
