@@ -1,4 +1,4 @@
-//Set up canvas for rendering
+//Set up canvas for rendering and grab HTML 
 let gameCanvas = document.querySelector('#game');
 let canvasHeight = getComputedStyle(gameCanvas)['height'];
 let canvasWidth = getComputedStyle(gameCanvas)['width'];
@@ -13,7 +13,6 @@ let goHomeButton = document.querySelector('.home-button');
 
 //setting up audio
 let music = document.querySelector('#music');
-
 let hurtSound = new Audio();
 let sound1= document.createElement("source");
 sound1.type = "audio/mpeg";
@@ -64,8 +63,9 @@ let changeC;
 let changeD;
 let addBubbles;
 
-let playerIntervalTime = 120;
 
+//for getting user key info
+document.addEventListener('keydown', keyAdapter);
 
 //Set up local storage for max score
 let maxScore = 0;
@@ -92,7 +92,7 @@ for (let i = 0; i < colorChoiceList.length; i++) {
     }
 }
 if (playerColorChoice === undefined) {
-    playerColorChoice = "cornflowerblue";
+    playerColorChoice = colorChoices[0];
 }
 
 
@@ -104,26 +104,11 @@ ctx.fillStyle = "white";
 ctx.strokeStyle = "red";
 ctx.lineWidth = 1;
 
+
 //setting up the canvas
 gameCanvas.setAttribute('height', canvasHeight);
 gameCanvas.setAttribute('width', canvasWidth);
 
-
-/*
-window.addEventListener("DOMContentLoaded", (e) => {
-    player = new Player("blue");
-    computer = new Computer();
-    computerBubbles.push(computer);
-    computer = new Computer();
-    computerBubbles.push(computer);
-    const change = setInterval(gameLoop, 120);
-    const change1 = setInterval(gameLoop1, 200);
-    const changeC = setInterval(changeColor, 5000);
-    const changeD = setInterval(changeDirection, 2500);
-    const addBubbles = setInterval(addComputerBubble, 2000);
-
-})
-*/
 
 
 //Start button click to start game 
@@ -133,20 +118,22 @@ startButton.addEventListener('click', function () {
 
     gameStart();
 })
-
+// Play again button at game over screen
 playAgainButton.addEventListener('click', function () {
     gameScreen.classList.toggle("hidden");
     gameOverScreen.classList.toggle("hidden");
 
     gameStart();
 })
-
+//Go home button at game over screen
 goHomeButton.addEventListener('click', function () {
     gameOverScreen.classList.toggle("hidden");
     startScreen.classList.toggle("hidden");
 })
 
 
+
+//start game - sets initial computer quantity, score, life points, and starts game loops
 function gameStart() {
     music.play();
   
@@ -160,26 +147,25 @@ function gameStart() {
     computerBubbles.push(computer);
     computer = new Computer();
     computerBubbles.push(computer);
-    /*
-    !change ? change=setInterval(gameLoop, playerIntervalTime ) : null;
-    !change1 ? change1=setInterval(gameLoop1, 500) : null;
-    !changeC ? changeC=setInterval(changeColor, 5000) : null;
-    !changeD ? changeD=setInterval(changeDirection, 2500) : null;
-    !addBubbles ? addBubbles = setInterval(addComputerBubble, 2000) : null;
-    */
-    change = setInterval(gameLoop, playerIntervalTime);
+
+
+    //timer for player movement speed, renderings, and collission checks
+    change = setInterval(gameLoop, 120);
+    //timer for computer movement speed
     change1 = setInterval(gameLoop1, 500);
+    //timer for all computers to change to a random color
     changeC = setInterval(changeColor, 5000);
+    //timer for all computers to change to a random direction
     changeD = setInterval(changeDirection, 2500);
+    //timer to add an additional ghost in the mix   
     addBubbles = setInterval(addComputerBubble, 2000);
 }
 
 
 
-//for getting key info
-document.addEventListener('keydown', keyAdapter);
 
 
+//Player class - initialize size; function to get the correct pacman image; function to drawImage on canvas
 class Player {
     constructor(color) {
         this.width = unitSize;
@@ -189,16 +175,14 @@ class Player {
         this.color = color;
         this.pacmanImage = getPacman(this.color);
         this.render = function () {
-            //ctx.fillStyle = this.color;
-       
             ctx.drawImage(this.pacmanImage, this.playerX, this.playerY, unitSize, unitSize);
-            //ctx.fillRect(this.playerX, this.playerY, unitSize, unitSize);
         }
 
     }
 
 }
 
+//takes the player color choice, and return corresponding color pacman image
 function getPacman(color) {
     switch (color) {
         case 'cornflowerblue':
@@ -219,11 +203,10 @@ function getPacman(color) {
     }
 }
 
-function rotateImage(){
-
-}
 
 
+//Computer class - initializes size, and randomly selects a color and direction for the computer ghost
+// function to get corresponding colored ghost and render it. 
 class Computer {
     constructor() {
         this.width = unitSize;
@@ -235,10 +218,8 @@ class Computer {
         
 
         this.render = function () {
-            //ctx.fillStyle = this.color;
             let ghostImage = getGhost(this.color);
             ctx.drawImage(ghostImage, this.computerX, this.computerY, unitSize, unitSize)
-            //ctx.fillRect(this.computerX, this.computerY, unitSize, unitSize);
         }
     }
 
@@ -267,7 +248,7 @@ function getGhost(color) {
 
 
 
-
+// changes the direction field of all the computers
 function changeDirection() {
     for (let i = 0; i < computerBubbles.length; i++) {
         randomDirection = Math.round(Math.random() * (directionChoices.length - 1));
@@ -275,6 +256,8 @@ function changeDirection() {
 
     }
 }
+
+//changes the color of all the computers
 function changeColor() {
     for (let i = 0; i < computerBubbles.length; i++) {
         randomColor = Math.round(Math.random() * (colorChoices.length - 1));
@@ -283,22 +266,33 @@ function changeColor() {
     }
 }
 
+// add a new computer to the array
 function addComputerBubble() {
     computer = new Computer();
     computerBubbles.push(computer);
 }
 
+
+
 function gameLoop() {
+    //if alive
     if (lifePoints > 0) {
+        //clear canvas
         ctx.clearRect(0, 0, game.width, game.height);
-        //ctx.drawImage(background, 0, 0, game.width, game.height);
+        //draw player
         player.render();
+        //draw computers
         for (let i = 0; i < computerBubbles.length; i++) {
             computerBubbles[i].render();
         }
 
+        //can optionally draw a grid
         //drawGrid();
+
+        //check if the player ate a ghost, and the right one
         checkPlayerCollision();
+
+        //update score, life, and max score
         scoreDisplay[0].textContent = "Score: " + score;
         lifeDisplay.textContent = "Life: " + lifePoints;
         maxScoreDisplay[0].textContent = "Max Score: " + localStorage.getItem('maxScore');
@@ -307,10 +301,13 @@ function gameLoop() {
 
 }
 
+// computer movement
 function gameLoop1() {
     movementHandler();
 }
 
+
+//increment player movement based on keys pressed
 function keyAdapter(e) {
 
     switch (e.key) {
@@ -358,7 +355,7 @@ function keyAdapter(e) {
 
 }
 
-
+// computer movement based on their direction field
 function movementHandler() {
     for (let i = 0; i < computerBubbles.length; i++) {
 
@@ -413,6 +410,8 @@ function movementHandler() {
 
 }
 
+
+//check for player collision - update score, life, and play sounds affect based on same color ghost as pacman or not
 function checkPlayerCollision() {
     //Check if any other computer are occupying that space
     for (let i = 0; i < computerBubbles.length; i++) {
@@ -430,12 +429,7 @@ function checkPlayerCollision() {
                     localStorage.setItem("maxScore", maxScoreString);
                 }
                 computerBubbles[i] = new Computer();
-                /*if (score>2){
-                    playerIntervalTime = 20;
-                }
-                if(score>4){
-                    playerIntervalTime = 40;
-                }*/
+
             }
             else {
                 lifePoints--;
@@ -465,7 +459,7 @@ function checkPlayerCollision() {
 
 
 
-//just for ease.optional
+//Can draw a grid based on preferences
 function drawGrid() {
     for (let i = 0; i < intWidth / unitSize; i++) {
 
