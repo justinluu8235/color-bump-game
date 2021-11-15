@@ -21,7 +21,7 @@
 
 ## How to play 🎮
 
-> 1.  Go to [livesite](https://ruvvet.github.io).
+> 1.  Go to [livesite](https://justinluu8235.github.io/color-pac-game/).
 > 2.  Pick a color of pacman to start 
 > 3.  Use 'a', 'w', 's', 'd' to move pacman around
 > 4.  Successfully eating a ghost of the same color will add +1 to your score. Track your max score.

@@ -150,7 +150,7 @@ function gameStart() {
 
 
     //timer for player movement speed, renderings, and collission checks
-    change = setInterval(gameLoop, 120);
+    change = setInterval(gameLoop, 12);
     //timer for computer movement speed
     change1 = setInterval(gameLoop1, 500);
     //timer for all computers to change to a random color
@@ -296,7 +296,6 @@ function gameLoop() {
         //draw player
        
         player.render(player.degRotate);
-        
         //draw computers
         for (let i = 0; i < computerBubbles.length; i++) {
             computerBubbles[i].render();
