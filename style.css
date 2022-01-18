@@ -29,7 +29,7 @@ body{
 }
 
 .start-screen, .game-over{
-    width:480px;
+    width:550px;
     height: 475px;
     margin-top: 15px;
     display:flex;
@@ -407,14 +407,13 @@ img{
 }
 
 
-@media only screen and (min-width: 700px){
+@media only screen and (max-width: 700px){
     .start-screen{
-       width: 550px;
+       width: 475px;
     }
 
     body{
-        top:0;
-        left: 0;
-        width: 100%;
+        position:initial;
+        width: 500px;
     }
 }
