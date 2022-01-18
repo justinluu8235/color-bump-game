@@ -429,11 +429,12 @@ img{
     .color-selection{
         margin-top:45px;
     }
+
     body{
         position:initial;
         width: 500px;
-
-        touch-action: manipulation;
+        user-select: none;
+        touch-action: none;
     }
 }
 
