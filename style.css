@@ -428,5 +428,7 @@ img{
     body{
         position:initial;
         width: 500px;
+        touch-action: manipulation;
     }
 }
+
