@@ -46,6 +46,11 @@ let lifeDisplay = document.querySelector('.life');
 let maxScoreDisplay = document.querySelectorAll('.max-score');
 
 
+//Set up local storage for max score
+let maxScore = 0;
+let maxScoreString = maxScore.toString();
+localStorage.setItem('maxScore', maxScoreString);
+
 //Set up initial fields
 let unitSize = 25;
 let computerBubbles = [];
@@ -57,6 +62,7 @@ let colorChoices = ["cornflowerblue", "orange", "darkseagreen", "firebrick", "pi
 let randomColor = Math.round(Math.random() * (colorChoices.length - 1));
 let directionChoices = ["U", "D", "L", "R"];
 let randomDirection = Math.round(Math.random() * (directionChoices.length - 1));
+//initializing intervals
 let change;
 let change1;
 let changeC;
@@ -67,10 +73,6 @@ let addBubbles;
 //for getting user key info
 document.addEventListener('keydown', keyAdapter);
 
-//Set up local storage for max score
-let maxScore = 0;
-let maxScoreString = maxScore.toString();
-localStorage.setItem('maxScore', maxScoreString);
 
 
 
@@ -80,10 +82,12 @@ let colorChoiceList = document.querySelectorAll('.circle');
 
 for (let i = 0; i < colorChoiceList.length; i++) {
     colorChoiceList[i].onclick = function () {
+        //Set all the background of the colors to white
         for (let i = 0; i < colorChoiceList.length; i++) {
             let square = document.querySelector('#' + colorChoiceList[i].classList[0] + '-square');
             square.style.backgroundColor = "white";
         }
+        //For the one clicked, set background to grey
         let square = document.querySelector('#' + colorChoiceList[i].classList[0] + '-square')
         square.style.backgroundColor = "grey";
         playerColorChoice = colorChoiceList[i].classList[0];
@@ -91,6 +95,7 @@ for (let i = 0; i < colorChoiceList.length; i++) {
 
     }
 }
+//If they dont pick anything, assume first color
 if (playerColorChoice === undefined) {
     playerColorChoice = colorChoices[0];
 }
@@ -136,8 +141,8 @@ goHomeButton.addEventListener('click', function () {
 //start game - sets initial computer quantity, score, life points, and starts game loops
 function gameStart() {
     music.play();
-  
     music.volume = 0.2;
+
     score = 0;
     lifePoints = 5;
     computerBubbles = [];
