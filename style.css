@@ -421,13 +421,18 @@ img{
 
 
 @media only screen and (max-width: 700px){
-    .start-screen{
+    .start-screen, .game-screen{
        width: 475px;
+       height: 525px;
     }
 
+    .color-selection{
+        margin-top:45px;
+    }
     body{
         position:initial;
         width: 500px;
+
         touch-action: manipulation;
     }
 }
