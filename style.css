@@ -29,7 +29,7 @@ body{
 }
 
 .start-screen, .game-over{
-    width:550px;
+    width:480px;
     height: 475px;
     margin-top: 15px;
     display:flex;
@@ -37,6 +37,10 @@ body{
     align-items:center;
      background-color: white; 
 }
+
+
+
+
 .game-title-row{
     height:100px;
     width:500px;
@@ -400,4 +404,17 @@ img{
 
 .hidden{
     display:none;
+}
+
+
+@media only screen and (min-width: 700px){
+    .start-screen{
+       width: 550px;
+    }
+
+    body{
+        top:0;
+        left: 0;
+        width: 100%;
+    }
 }
