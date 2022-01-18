@@ -10,6 +10,13 @@ let startScreen = document.querySelector('.start-screen');
 let gameOverScreen = document.querySelector('.game-over');
 let playAgainButton = document.querySelector('.restart-button');
 let goHomeButton = document.querySelector('.home-button');
+let upButton = document.querySelector('.up-button');
+let downButton = document.querySelector('.down-button');
+let leftButton = document.querySelector('.left-button');
+let rightButton = document.querySelector('.right-button');
+
+
+
 
 //setting up audio
 let music = document.querySelector('#music');
@@ -326,6 +333,31 @@ function gameLoop1() {
     movementHandler();
 }
 
+
+upButton.onclick = () => {
+    if (player.playerY - unitSize >= 0) {
+        player.degRotate = 270;
+        player.playerY -= unitSize;  
+    }
+}
+downButton.onclick = () => {
+    if (player.playerY + unitSize <= intHeight - unitSize) {
+        player.degRotate = 90;
+        player.playerY += unitSize;
+    }
+}
+leftButton.onclick = () => {
+    if (player.playerX - unitSize >= 0) {
+        player.degRotate = 180;
+        player.playerX -= unitSize;
+    }
+}
+rightButton.onclick = () => {
+    if (player.playerX + unitSize <= intWidth - unitSize) {
+        player.degRotate = 0;
+        player.playerX += unitSize;
+    }
+}
 
 //increment player movement based on keys pressed
 function keyAdapter(e) {
