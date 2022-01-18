@@ -307,6 +307,13 @@ img{
     background-color: #222;
     width: 20px;
     height: 80px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:center;
+    color:white;
+    padding:2px;
+
 }
 .left-right-button{
     position:relative;
@@ -314,6 +321,12 @@ img{
     background-color: #222;
     width: 80px;
     height: 20px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    color:white;
+    padding:2px;
 }
 .gba-a-b{
     margin-right:20px;
